@@ -13,6 +13,12 @@ create table public.accounts_users (
     accountid uuid references public.accounts on delete cascade
 );
 
+-- enable RLS
+alter table public.userprofile enable row level security;
+alter table public.accounts enable row level security;
+alter table public.accounts_users enable row level security;
+
+-- function to save user info to other tables
 create or replace function public.handle_new_user()
 returns trigger
 language plpgsql 
